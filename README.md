@@ -207,7 +207,7 @@ docker run --rm --name rahc -p 8080:8080 -d -e RAS_ADDRESS=192.168.1.1 -e RAS_PO
 Для REST-протокола параметры авторизации передаются как query-params.
 
 Например, для получения списка информационных баз в кластере необходимо вызвать
-`/api/jsonrpc/v1/infobase/all?address=localhost&port=1545&clusterAdminUsername=admin&clusterAdminPassword=password&clusterId=81f8db64-f9d5-4cb6-b2f8-c6107f95f4e3` 
+`/api/jsonrpc/v2/infobase/all?address=localhost&port=1545&clusterAdminUsername=admin&clusterAdminPassword=password&clusterId=81f8db64-f9d5-4cb6-b2f8-c6107f95f4e3` 
 
 Для JSON-RPC протокола параметры авторизации передаются как отдельный параметр `сonnection`. 
 
