@@ -47,12 +47,7 @@ public class RacService implements Serializable, AutoCloseable {
   @PostConstruct
   protected void init() {
     connector = factory.createConnector(rasProperties.getTimeout());
-    connection = connector.connect(rasProperties.getAddress(), rasProperties.getPort());
 
-    connection.authenticateAgent(
-      rasProperties.getCentralServerAdminUsername(),
-      rasProperties.getCentralServerAdminPassword()
-    );
   }
 
   @PreDestroy
@@ -67,6 +62,7 @@ public class RacService implements Serializable, AutoCloseable {
 
   @RetryableRacMethod
   public UUID getClusterId(ConnectionDTO connection) {
+    checkConnection();
     if (connection.getClusterId().isPresent()) {
       return UUID.fromString(connection.getClusterId().orElseThrow());
     }
@@ -81,6 +77,7 @@ public class RacService implements Serializable, AutoCloseable {
 
   @RetryableRacMethod
   public UUID getIbId(ConnectionDTO connection) {
+    checkConnection();
     if (connection.getIbId().isPresent()) {
       return UUID.fromString(connection.getIbId().orElseThrow());
     }
@@ -287,13 +284,27 @@ public class RacService implements Serializable, AutoCloseable {
   }
 
   private void checkConnection() {
+    if (connection == null) {
+      doCreateConnection();
+    }
+
     try {
       connection.getClusters();
     } catch (AgentAdminException ex) {
       // try to reconnect
       LOGGER.warn("Can't get clusters from connection. Trying to reconnect to RAS...", ex);
-      connection = connector.connect(rasProperties.getAddress(), rasProperties.getPort());
+
+      doCreateConnection();
     }
+  }
+
+  private synchronized void doCreateConnection() {
+    connection = connector.connect(rasProperties.getAddress(), rasProperties.getPort());
+
+    connection.authenticateAgent(
+      rasProperties.getCentralServerAdminUsername(),
+      rasProperties.getCentralServerAdminPassword()
+    );
   }
 
 }
