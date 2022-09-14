@@ -168,6 +168,18 @@ public class RacService implements Serializable, AutoCloseable {
   }
 
   @RetryableRacMethod
+  public UUID createInfoBase(
+    UUID clusterId,
+    IInfoBaseInfo ibInfo,
+    int mode
+  ) throws IllegalArgumentException {
+    checkConnection();
+    authenticate(clusterId);
+
+    return connection.createInfoBase(clusterId, ibInfo, mode);
+  }
+
+  @RetryableRacMethod
   public List<ISessionInfo> getSessions(UUID clusterId) {
     checkConnection();
     authenticate(clusterId);

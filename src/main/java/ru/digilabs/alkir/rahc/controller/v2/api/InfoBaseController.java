@@ -3,7 +3,6 @@ package ru.digilabs.alkir.rahc.controller.v2.api;
 import com._1c.v8.ibis.admin.IInfoBaseInfo;
 import com._1c.v8.ibis.admin.IInfoBaseInfoShort;
 import com._1c.v8.ibis.admin.ISessionInfo;
-import com._1c.v8.ibis.admin.InfoBaseInfo;
 import com.googlecode.jsonrpc4j.JsonRpcParam;
 import com.googlecode.jsonrpc4j.JsonRpcService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,6 +14,7 @@ import ru.digilabs.alkir.rahc.controller.v2.validation.InfoBaseIdIsNotEmpty;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @JsonRpcService("/api/jsonrpc/v2/infobase")
 @Tag(name = "v2/info-base-controller")
@@ -50,5 +50,12 @@ public interface InfoBaseController extends JsonRpcController {
   void update(
     @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
     @JsonRpcParam("ibInfo") IInfoBaseInfo ibInfo
+  );
+
+  @Operation
+  UUID create(
+    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+    @JsonRpcParam("ibInfo") IInfoBaseInfo ibInfo,
+    @JsonRpcParam("mode") int mode
   );
 }
