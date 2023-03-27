@@ -74,12 +74,12 @@ dependencies {
 
 	implementation("org.jboss.netty", "netty", "3.2.10.Final")
 
-	implementation("com._1c.v8", "core", "1.0.30-SNAPSHOT")
-	implementation("com._1c.v8", "ibis.admin", "1.6.7")
-	implementation("com._1c.v8", "ibis", "1.1.1-SNAPSHOT")
-	implementation("com._1c.v8", "ibis.swp", "1.1.1-SNAPSHOT")
-	implementation("com._1c.v8", "swp", "1.0.3-SNAPSHOT")
-	implementation("com._1c.v8", "swp.netty", "1.0.3-SNAPSHOT")
+	implementation("com._1c.v8", "core", "1.0.2")
+	implementation("com._1c.v8", "ibis.admin", "1.6.8")
+	implementation("com._1c.v8", "ibis", "1.1.1")
+	implementation("com._1c.v8", "ibis.swp", "1.1.1")
+	implementation("com._1c.v8", "swp", "1.0.2")
+	implementation("com._1c.v8", "swp.netty", "1.0.2")
 
 	implementation("org.awaitility", "awaitility", "4.2.0")
 
@@ -114,51 +114,52 @@ tasks.jacocoTestReport {
 publishing {
 	publications {
 		create<MavenPublication>("ibis-core") {
-			artifact(file("ibis/lib/com._1c.v8.core-1.0.30-SNAPSHOT.jar")) {
+			artifact(file("ibis/lib/com._1c.v8.core-1.0.2.jar")) {
 				groupId = "com._1c.v8"
 				artifactId = "core"
-				version = "1.0.30-SNAPSHOT"
+				version = "1.0.2"
 			}
 		}
 		create<MavenPublication>("ibis-admin") {
-			artifact(file("ibis/lib/com._1c.v8.ibis.admin-1.6.7.jar")) {
+			artifact(file("ibis/lib/com._1c.v8.ibis.admin-1.6.8.jar")) {
 				groupId = "com._1c.v8"
 				artifactId = "ibis.admin"
-				version = "1.6.7"
+				version = "1.6.8"
 			}
 		}
 		create<MavenPublication>("ibis-swp") {
-			artifact(file("ibis/lib/com._1c.v8.ibis.swp-1.1.1-SNAPSHOT.jar")) {
+			artifact(file("ibis/lib/com._1c.v8.ibis.swp-1.1.1.jar")) {
 				groupId = "com._1c.v8"
 				artifactId = "ibis.swp"
-				version = "1.1.1-SNAPSHOT"
+				version = "1.1.1"
 			}
 		}
 		create<MavenPublication>("ibis") {
-			artifact(file("ibis/lib/com._1c.v8.ibis-1.1.1-SNAPSHOT.jar")) {
+			artifact(file("ibis/lib/com._1c.v8.ibis-1.1.1.jar")) {
 				groupId = "com._1c.v8"
 				artifactId = "ibis"
-				version = "1.1.1-SNAPSHOT"
+				version = "1.1.1"
 			}
 		}
 		create<MavenPublication>("swp-netty") {
-			artifact(file("ibis/lib/com._1c.v8.swp.netty-1.0.3-SNAPSHOT.jar")) {
+			artifact(file("ibis/lib/com._1c.v8.swp.netty-1.0.2.jar")) {
 				groupId = "com._1c.v8"
 				artifactId = "swp.netty"
-				version = "1.0.3-SNAPSHOT"
+				version = "1.0.2"
 			}
 		}
 		create<MavenPublication>("swp") {
-			artifact(file("ibis/lib/com._1c.v8.swp-1.0.3-SNAPSHOT.jar")) {
+			artifact(file("ibis/lib/com._1c.v8.swp-1.0.2.jar")) {
 				groupId = "com._1c.v8"
 				artifactId = "swp"
-				version = "1.0.3-SNAPSHOT"
+				version = "1.0.2"
 			}
 		}
 	}
 }
 
-tasks.register<GradleBuild>("copyIbisToMavenLocal") {
+tasks.register<GradleBuild>("publishIbisToMavenLocal") {
+	group = "publishing"
 	tasks = listOf(
 		"publishIbis-adminPublicationToMavenLocal",
 		"publishIbis-corePublicationToMavenLocal",
