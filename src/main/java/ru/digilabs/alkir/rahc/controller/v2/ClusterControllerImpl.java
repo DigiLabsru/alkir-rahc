@@ -1,7 +1,7 @@
 package ru.digilabs.alkir.rahc.controller.v2;
 
-import com._1c.v8.ibis.admin.ClusterInfo;
 import com._1c.v8.ibis.admin.IClusterInfo;
+import com._1c.v8.ibis.admin.IClusterServiceInfo;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
@@ -49,6 +49,15 @@ public class ClusterControllerImpl implements ClusterController {
   ) {
     try (var racService = racServiceProvider.getRacService(connection)) {
       return racService.editCluster(clusterInfo);
+    }
+  }
+
+  @Override
+  @GetMapping("services")
+  public List<IClusterServiceInfo> getClusterServices(ConnectionDTO connection) {
+    try (var racService = racServiceProvider.getRacService(connection)) {
+      var clusterId = racService.getClusterId(connection);
+      return racService.getClusterServices(clusterId);
     }
   }
 

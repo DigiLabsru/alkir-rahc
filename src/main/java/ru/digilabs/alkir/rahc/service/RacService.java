@@ -5,6 +5,7 @@ import com._1c.v8.ibis.admin.AgentAdminException;
 import com._1c.v8.ibis.admin.IAgentAdminConnection;
 import com._1c.v8.ibis.admin.IClusterInfo;
 import com._1c.v8.ibis.admin.IClusterManagerInfo;
+import com._1c.v8.ibis.admin.IClusterServiceInfo;
 import com._1c.v8.ibis.admin.IInfoBaseInfo;
 import com._1c.v8.ibis.admin.IInfoBaseInfoShort;
 import com._1c.v8.ibis.admin.ISessionInfo;
@@ -109,6 +110,30 @@ public class RacService implements Serializable, AutoCloseable {
     checkConnection();
     authenticate(clusterId);
     return connection.getClusterManagers(clusterId);
+  }
+
+  @RetryableRacMethod
+  public IClusterManagerInfo getClusterManagerInfo(UUID clusterId, UUID managerId) {
+    checkConnection();
+    authenticate(clusterId);
+    return connection.getClusterManagerInfo(clusterId, managerId);
+  }
+
+  @RetryableRacMethod
+  public List<IClusterServiceInfo> getClusterServices(UUID clusterId) {
+    checkConnection();
+    authenticate(clusterId);
+    return connection.getClusterServices(clusterId);
+  }
+
+  @RetryableRacMethod
+  public List<IClusterServiceInfo> getClusterServices(UUID clusterId, UUID managerId) {
+    checkConnection();
+    authenticate(clusterId);
+
+    return getClusterServices(clusterId).stream()
+      .filter(service -> service.getClusterManagerIds().contains(managerId))
+      .toList();
   }
 
   @RetryableRacMethod
@@ -318,5 +343,4 @@ public class RacService implements Serializable, AutoCloseable {
       rasProperties.getCentralServerAdminPassword()
     );
   }
-
 }
