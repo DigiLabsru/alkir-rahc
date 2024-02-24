@@ -315,7 +315,7 @@ curl --request POST \
 Затем в терминале выполнить команду:
 
 ```shell
-./gradlew copyIbisToMavenLocal --offline
+./gradlew publishIbisToMavenLocal --offline
 ```
 
 ## Сборка
