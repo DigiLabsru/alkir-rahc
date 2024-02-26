@@ -222,9 +222,9 @@ docker run --rm --name rahc -p 8080:8080 -d -e RAS_ADDRESS=192.168.1.1 -e RAS_PO
       "address": "localhost",
       "port": 1545,
       "clusterAdminUsername": "admin",
-      "clusterAdminPassword": "password"
-    },
-    "clusterId": "81f8db64-f9d5-4cb6-b2f8-c6107f95f4e3"
+      "clusterAdminPassword": "password",
+      "clusterId": "81f8db64-f9d5-4cb6-b2f8-c6107f95f4e3"
+    }
   },
   "id": 1
 }
