@@ -222,9 +222,9 @@ docker run --rm --name rahc -p 8080:8080 -d -e RAS_ADDRESS=192.168.1.1 -e RAS_PO
       "address": "localhost",
       "port": 1545,
       "clusterAdminUsername": "admin",
-      "clusterAdminPassword": "password"
-    },
-    "clusterId": "81f8db64-f9d5-4cb6-b2f8-c6107f95f4e3"
+      "clusterAdminPassword": "password",
+      "clusterId": "81f8db64-f9d5-4cb6-b2f8-c6107f95f4e3"
+    }
   },
   "id": 1
 }
@@ -304,13 +304,18 @@ curl --request POST \
 
 Для локальной разработки или сборки контейнера через `bootBuildImage` используется openjdk17.
 
-Для сборки и запуска приложения необходимо скачать и установить в локальный maven-репозиторий
-библиотеки программного java-интерфейса для административного сервера: 
-[ibis](https://its.1c.ru/db/metod8dev#content:4985:hdoc:_top:java).
+Для сборки и запуска приложения необходимо скачать и установить в локальный репозиторий
+библиотеки программного java-интерфейса для административного сервера из состава : 
+[1С:Исполнителя U-версии](https://releases.1c.ru/project/Executor).
 
-Проект содержит gradle task для быстрой установки "ibis". Для этого скачанный архив необходимо
-распаковать в каталог `ibis` в корне проекта таким образом, чтобы внутри каталога `ibis`
-располагались каталоги `docs`, `lib` и так далее.
+Создайте в корне проекта каталог `ibis\lib` и скопируйте в него следующие файлы из архива 1С:Исполнителя:
+
+* com._1c.v8.core-1.0.2.jar
+* com._1c.v8.ibis.admin-1.6.8.jar
+* com._1c.v8.ibis.swp-1.1.1.jar
+* com._1c.v8.ibis-1.1.1.jar
+* com._1c.v8.swp.netty-1.0.2.jar
+* com._1c.v8.swp-1.0.2.jar
 
 Затем в терминале выполнить команду:
 
