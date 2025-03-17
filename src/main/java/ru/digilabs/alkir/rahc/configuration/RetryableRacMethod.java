@@ -13,6 +13,6 @@ import java.lang.annotation.Target;
 @Documented
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@Retryable(value = {V8Exception.class, AgentAdminException.class})
+@Retryable(retryFor = {V8Exception.class, AgentAdminException.class})
 public @interface RetryableRacMethod {
 }

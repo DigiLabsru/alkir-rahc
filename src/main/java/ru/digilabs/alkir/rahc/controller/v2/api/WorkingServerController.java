@@ -7,10 +7,10 @@ import com.googlecode.jsonrpc4j.JsonRpcParam;
 import com.googlecode.jsonrpc4j.JsonRpcService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import ru.digilabs.alkir.rahc.controller.JsonRpcController;
 import ru.digilabs.alkir.rahc.controller.v2.validation.ClusterIdIsNotEmpty;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,38 +18,38 @@ import java.util.UUID;
 @Tag(name = "v2/working-server-controller")
 public interface WorkingServerController extends JsonRpcController {
 
-  @Operation
-  List<IWorkingServerInfo> list(
-    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection
-  );
+    @Operation
+    List<IWorkingServerInfo> list(
+        @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection
+    );
 
-  @Operation
-  List<IWorkingProcessInfo> workingProcesses(
-    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
-    @JsonRpcParam("serverId") UUID serverId
-  );
+    @Operation
+    List<IWorkingProcessInfo> workingProcesses(
+        @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+        @JsonRpcParam("serverId") UUID serverId
+    );
 
-  @Operation
-  List<IClusterManagerInfo> clusterManagers(
-    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
-    @JsonRpcParam("serverId") UUID serverId
-  );
+    @Operation
+    List<IClusterManagerInfo> clusterManagers(
+        @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+        @JsonRpcParam("serverId") UUID serverId
+    );
 
-  @Operation
-  IWorkingServerInfo info(
-    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
-    @JsonRpcParam("serverId") UUID serverId
-  );
+    @Operation
+    IWorkingServerInfo info(
+        @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+        @JsonRpcParam("serverId") UUID serverId
+    );
 
-  @Operation
-  UUID edit(
-    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
-    @JsonRpcParam("serverInfo") IWorkingServerInfo serverInfo
-  );
+    @Operation
+    UUID edit(
+        @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+        @JsonRpcParam("serverInfo") IWorkingServerInfo serverInfo
+    );
 
-  @Operation
-  void delete(
-    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
-    @JsonRpcParam("serverId") UUID serverId
-  );
+    @Operation
+    void delete(
+        @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+        @JsonRpcParam("serverId") UUID serverId
+    );
 }

@@ -19,37 +19,37 @@ import java.util.UUID;
 @SecurityRequirement(name = "bearer")
 public interface InfoBaseController extends JsonRpcController {
 
-  @Operation
-  List<IInfoBaseInfoShort> list(@JsonRpcParam("clusterId") UUID clusterId);
+    @Operation
+    List<IInfoBaseInfoShort> list(@JsonRpcParam("clusterId") UUID clusterId);
 
-  @Operation
-  List<ISessionInfo> sessions(
-    @JsonRpcParam("clusterId") UUID clusterId,
-    @JsonRpcParam("ibId") UUID ibId
-  );
+    @Operation
+    List<ISessionInfo> sessions(
+        @JsonRpcParam("clusterId") UUID clusterId,
+        @JsonRpcParam("ibId") UUID ibId
+    );
 
-  @Operation
-  List<IInfoBaseInfo> fullList(@JsonRpcParam("clusterId") UUID clusterId);
+    @Operation
+    List<IInfoBaseInfo> fullList(@JsonRpcParam("clusterId") UUID clusterId);
 
-  @Operation
-  IInfoBaseInfoShort getInfoBase(
-    @JsonRpcParam("clusterId") UUID clusterId,
-    @JsonRpcParam("ibId") UUID ibId
-  );
+    @Operation
+    IInfoBaseInfoShort getInfoBase(
+        @JsonRpcParam("clusterId") UUID clusterId,
+        @JsonRpcParam("ibId") UUID ibId
+    );
 
-  @Operation
-  IInfoBaseInfo getInfoBaseFull(
-    @JsonRpcParam("clusterId") UUID clusterId,
-    @JsonRpcParam("ibId") UUID ibId,
-    @JsonRpcParam("ibUsername") Optional<String> ibUsername,
-    @JsonRpcParam("ibPassword") Optional<String> ibPassword
-  );
+    @Operation
+    IInfoBaseInfo getInfoBaseFull(
+        @JsonRpcParam("clusterId") UUID clusterId,
+        @JsonRpcParam("ibId") UUID ibId,
+        @JsonRpcParam("ibUsername") Optional<String> ibUsername,
+        @JsonRpcParam("ibPassword") Optional<String> ibPassword
+    );
 
-  @Operation
-  void update(
-    @JsonRpcParam("clusterId") UUID clusterId,
-    @JsonRpcParam("ibInfo") IInfoBaseInfo ibInfo,
-    @JsonRpcParam("ibUsername") Optional<String> ibUsername,
-    @JsonRpcParam("ibPassword") Optional<String> ibPassword
-  );
+    @Operation
+    void update(
+        @JsonRpcParam("clusterId") UUID clusterId,
+        @JsonRpcParam("ibInfo") IInfoBaseInfo ibInfo,
+        @JsonRpcParam("ibUsername") Optional<String> ibUsername,
+        @JsonRpcParam("ibPassword") Optional<String> ibPassword
+    );
 }

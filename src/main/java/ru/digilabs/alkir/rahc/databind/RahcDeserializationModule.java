@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RahcDeserializationModule extends SimpleModule {
-  @Override
-  public void setupModule(SetupContext context) {
-    addDeserializer(IWorkingServerInfo.class, new GenericDeserializer<>(IWorkingServerInfo.class, WorkingServerInfo.class));
-    addDeserializer(IInfoBaseInfo.class, new GenericDeserializer<>(IInfoBaseInfo.class, InfoBaseInfo.class));
-    addDeserializer(IClusterInfo.class, new GenericDeserializer<>(IClusterInfo.class, ClusterInfo.class));
-    addDeserializer(IPortRangeInfo.class, new IPortRangeInfoDeserializer(IPortRangeInfo.class));
+    @Override
+    public void setupModule(SetupContext context) {
+        addDeserializer(IWorkingServerInfo.class, new GenericDeserializer<>(IWorkingServerInfo.class, WorkingServerInfo.class));
+        addDeserializer(IInfoBaseInfo.class, new GenericDeserializer<>(IInfoBaseInfo.class, InfoBaseInfo.class));
+        addDeserializer(IClusterInfo.class, new GenericDeserializer<>(IClusterInfo.class, ClusterInfo.class));
+        addDeserializer(IPortRangeInfo.class, new IPortRangeInfoDeserializer(IPortRangeInfo.class));
 
-    super.setupModule(context);
-  }
+        super.setupModule(context);
+    }
 }

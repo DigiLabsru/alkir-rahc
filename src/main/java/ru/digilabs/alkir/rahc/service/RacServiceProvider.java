@@ -11,12 +11,12 @@ import ru.digilabs.alkir.rahc.controller.v2.api.ConnectionDTO;
 @RequiredArgsConstructor
 public class RacServiceProvider {
 
-  @Qualifier("racService")
-  private final ObjectProvider<RacService> racServiceObjectProvider;
+    @Qualifier("racService")
+    private final ObjectProvider<RacService> racServiceObjectProvider;
 
-  @RetryableRacMethod
-  public RacService getRacService(ConnectionDTO rasConnection) {
-    var configurationProperties = rasConnection.toConfigurationProperties();
-    return racServiceObjectProvider.getObject(configurationProperties);
-  }
+    @RetryableRacMethod
+    public RacService getRacService(ConnectionDTO rasConnection) {
+        var configurationProperties = rasConnection.toConfigurationProperties();
+        return racServiceObjectProvider.getObject(configurationProperties);
+    }
 }

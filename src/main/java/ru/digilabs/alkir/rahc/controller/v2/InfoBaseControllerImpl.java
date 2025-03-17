@@ -5,6 +5,7 @@ import com._1c.v8.ibis.admin.IInfoBaseInfoShort;
 import com._1c.v8.ibis.admin.ISessionInfo;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,6 @@ import ru.digilabs.alkir.rahc.controller.v2.validation.ClusterIdIsNotEmpty;
 import ru.digilabs.alkir.rahc.controller.v2.validation.InfoBaseIdIsNotEmpty;
 import ru.digilabs.alkir.rahc.service.RacServiceProvider;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,100 +32,100 @@ import java.util.UUID;
 @Validated
 public class InfoBaseControllerImpl implements InfoBaseController {
 
-  private final RacServiceProvider racServiceProvider;
+    private final RacServiceProvider racServiceProvider;
 
-  @Override
-  @GetMapping("all")
-  public List<IInfoBaseInfoShort> list(
-    @Valid @ClusterIdIsNotEmpty ConnectionDTO connection
-  ) {
-    try (var racService = racServiceProvider.getRacService(connection)) {
-      var clusterId = racService.getClusterId(connection);
+    @Override
+    @GetMapping("all")
+    public List<IInfoBaseInfoShort> list(
+        @Valid @ClusterIdIsNotEmpty ConnectionDTO connection
+    ) {
+        try (var racService = racServiceProvider.getRacService(connection)) {
+            var clusterId = racService.getClusterId(connection);
 
-      return racService.getInfoBases(clusterId);
+            return racService.getInfoBases(clusterId);
+        }
     }
-  }
 
-  @Override
-  @GetMapping("sessions")
-  public List<ISessionInfo> sessions(
-    @Valid @ClusterIdIsNotEmpty @InfoBaseIdIsNotEmpty ConnectionDTO connection
-  ) {
-    try (var racService = racServiceProvider.getRacService(connection)) {
-      var clusterId = racService.getClusterId(connection);
-      var ibId = racService.getIbId(connection);
+    @Override
+    @GetMapping("sessions")
+    public List<ISessionInfo> sessions(
+        @Valid @ClusterIdIsNotEmpty @InfoBaseIdIsNotEmpty ConnectionDTO connection
+    ) {
+        try (var racService = racServiceProvider.getRacService(connection)) {
+            var clusterId = racService.getClusterId(connection);
+            var ibId = racService.getIbId(connection);
 
-      return racService.getSessions(clusterId, ibId);
+            return racService.getSessions(clusterId, ibId);
+        }
     }
-  }
 
-  @Override
-  @GetMapping("all/full")
-  public List<IInfoBaseInfo> fullList(
-    @Valid @ClusterIdIsNotEmpty ConnectionDTO connection
-  ) {
-    try (var racService = racServiceProvider.getRacService(connection)) {
-      var clusterId = racService.getClusterId(connection);
+    @Override
+    @GetMapping("all/full")
+    public List<IInfoBaseInfo> fullList(
+        @Valid @ClusterIdIsNotEmpty ConnectionDTO connection
+    ) {
+        try (var racService = racServiceProvider.getRacService(connection)) {
+            var clusterId = racService.getClusterId(connection);
 
-      return racService.getInfoBasesFull(clusterId);
+            return racService.getInfoBasesFull(clusterId);
+        }
     }
-  }
 
-  @Override
-  @GetMapping
-  public IInfoBaseInfoShort getInfoBase(
-    @Valid @ClusterIdIsNotEmpty @InfoBaseIdIsNotEmpty ConnectionDTO connection
-  ) {
-    try (var racService = racServiceProvider.getRacService(connection)) {
-      var clusterId = racService.getClusterId(connection);
-      var ibId = racService.getIbId(connection);
+    @Override
+    @GetMapping
+    public IInfoBaseInfoShort getInfoBase(
+        @Valid @ClusterIdIsNotEmpty @InfoBaseIdIsNotEmpty ConnectionDTO connection
+    ) {
+        try (var racService = racServiceProvider.getRacService(connection)) {
+            var clusterId = racService.getClusterId(connection);
+            var ibId = racService.getIbId(connection);
 
-      return racService.getInfoBase(clusterId, ibId);
+            return racService.getInfoBase(clusterId, ibId);
+        }
     }
-  }
 
-  @Override
-  @GetMapping("full")
-  public IInfoBaseInfo getInfoBaseFull(
-    @Valid @ClusterIdIsNotEmpty @InfoBaseIdIsNotEmpty ConnectionDTO connection
-  ) {
-    try (var racService = racServiceProvider.getRacService(connection)) {
-      var clusterId = racService.getClusterId(connection);
-      var ibId = racService.getIbId(connection);
-      var ibUsername = connection.getIbUsername();
-      var ibPassword = connection.getIbPassword();
+    @Override
+    @GetMapping("full")
+    public IInfoBaseInfo getInfoBaseFull(
+        @Valid @ClusterIdIsNotEmpty @InfoBaseIdIsNotEmpty ConnectionDTO connection
+    ) {
+        try (var racService = racServiceProvider.getRacService(connection)) {
+            var clusterId = racService.getClusterId(connection);
+            var ibId = racService.getIbId(connection);
+            var ibUsername = connection.getIbUsername();
+            var ibPassword = connection.getIbPassword();
 
-      return racService.getInfoBaseFull(clusterId, ibId, ibUsername, ibPassword);
+            return racService.getInfoBaseFull(clusterId, ibId, ibUsername, ibPassword);
+        }
     }
-  }
 
-  @Override
-  @PutMapping
-  public void update(
-    @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
-    @RequestBody IInfoBaseInfo ibInfo
-  ) {
-    try (var racService = racServiceProvider.getRacService(connection)) {
-      var clusterId = racService.getClusterId(connection);
-      var ibUsername = connection.getIbUsername();
-      var ibPassword = connection.getIbPassword();
+    @Override
+    @PutMapping
+    public void update(
+        @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+        @RequestBody IInfoBaseInfo ibInfo
+    ) {
+        try (var racService = racServiceProvider.getRacService(connection)) {
+            var clusterId = racService.getClusterId(connection);
+            var ibUsername = connection.getIbUsername();
+            var ibPassword = connection.getIbPassword();
 
-      racService.updateInfoBase(clusterId, ibInfo, ibUsername, ibPassword);
+            racService.updateInfoBase(clusterId, ibInfo, ibUsername, ibPassword);
+        }
     }
-  }
 
-  @Override
-  @PostMapping
-  public UUID create(
-    @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
-    @RequestBody IInfoBaseInfo ibInfo,
-    @RequestParam int mode
-  ) {
-    try (var racService = racServiceProvider.getRacService(connection)) {
-      var clusterId = racService.getClusterId(connection);
+    @Override
+    @PostMapping
+    public UUID create(
+        @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+        @RequestBody IInfoBaseInfo ibInfo,
+        @RequestParam int mode
+    ) {
+        try (var racService = racServiceProvider.getRacService(connection)) {
+            var clusterId = racService.getClusterId(connection);
 
-      return racService.createInfoBase(clusterId, ibInfo, mode);
+            return racService.createInfoBase(clusterId, ibInfo, mode);
+        }
     }
-  }
 
 }

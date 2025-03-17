@@ -1,40 +1,46 @@
 package ru.digilabs.alkir.rahc.auth;
 
-import ru.digilabs.alkir.rahc.configuration.AuthConfigurationProperties;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter;
+import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
+import org.springframework.security.web.SecurityFilterChain;
+import ru.digilabs.alkir.rahc.configuration.AuthConfigurationProperties;
 
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Order(1)
-public class AuthConfigurerAdapter extends WebSecurityConfigurerAdapter {
+public class AuthConfigurerAdapter {
 
-  private final ApiKeyAuthManager apiKeyAuthManager;
-  private final AuthConfigurationProperties authProperties;
+    private final ApiKeyAuthManager apiKeyAuthManager;
+    private final AuthConfigurationProperties authProperties;
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    var filter = new BearerTokenAuthenticationFilter(apiKeyAuthManager);
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(httpSecuritySessionManagementConfigurer ->
+                httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            );
 
-    var httpSecuritySessionManagementConfigurer = http.antMatcher("/api/**")
-      .csrf()
-      .disable()
-      .sessionManagement()
-      .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        if (authProperties.isEnabled()) {
+            var bearerTokenAuthenticationFilter = new BearerTokenAuthenticationFilter(apiKeyAuthManager);
 
-    if (authProperties.isEnabled()) {
-      httpSecuritySessionManagementConfigurer.and()
-        .addFilter(filter)
-        .authorizeRequests()
-        .anyRequest()
-        .authenticated();
+            http
+                .addFilter(bearerTokenAuthenticationFilter)
+                .authorizeHttpRequests(authorizeRequests ->
+                    authorizeRequests
+                        .anyRequest()
+                        .authenticated()
+                );
+        }
+
+        return http.build();
     }
-  }
 }

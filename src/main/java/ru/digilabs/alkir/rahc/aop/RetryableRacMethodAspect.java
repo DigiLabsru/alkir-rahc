@@ -20,36 +20,36 @@ import static org.hamcrest.Matchers.notNullValue;
 @RequiredArgsConstructor
 public class RetryableRacMethodAspect {
 
-  private final RetryTemplate retryTemplate;
+    private final RetryTemplate retryTemplate;
 
-  @Around("@annotation(ru.digilabs.alkir.rahc.configuration.RetryableRacMethod)")
-  public Object retryableRacMethodCall(ProceedingJoinPoint joinPoint) {
+    @Around("@annotation(ru.digilabs.alkir.rahc.configuration.RetryableRacMethod)")
+    public Object retryableRacMethodCall(ProceedingJoinPoint joinPoint) {
 
-    return retryTemplate.execute(context -> {
-      AtomicReference<Object> reference = new AtomicReference<>();
-      var thread = Executors.defaultThreadFactory().newThread(() ->
-        {
-          try {
-            reference.set(joinPoint.proceed());
-          } catch (Throwable e) {
-            throw new RuntimeException(e);
-          }
-        }
-      );
+        return retryTemplate.execute(context -> {
+            AtomicReference<Object> reference = new AtomicReference<>();
+            var thread = Executors.defaultThreadFactory().newThread(() ->
+                {
+                    try {
+                        reference.set(joinPoint.proceed());
+                    } catch (Throwable e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            );
 
-      thread.start();
+            thread.start();
 
-      try {
-        await()
-          .atMost(10_000, TimeUnit.MILLISECONDS)
-          .untilAtomic(reference, notNullValue());
-      } catch (ConditionTimeoutException ex) {
-        thread.stop();
-        throw ex;
-      }
+            try {
+                await()
+                    .atMost(10_000, TimeUnit.MILLISECONDS)
+                    .untilAtomic(reference, notNullValue());
+            } catch (ConditionTimeoutException ex) {
+                thread.stop();
+                throw ex;
+            }
 
-      return reference.get();
-    });
+            return reference.get();
+        });
 
-  }
+    }
 }

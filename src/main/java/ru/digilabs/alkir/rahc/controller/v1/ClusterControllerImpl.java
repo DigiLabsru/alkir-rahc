@@ -23,19 +23,19 @@ import java.util.UUID;
 @RequestMapping("api/rest/v1/cluster")
 public class ClusterControllerImpl implements ClusterController {
 
-  @Qualifier("sessionScopedRacService")
-  private final RacService racService;
+    @Qualifier("sessionScopedRacService")
+    private final RacService racService;
 
-  @Override
-  @GetMapping("all")
-  public List<IClusterInfo> list() {
-    return racService.getClusters();
-  }
+    @Override
+    @GetMapping("all")
+    public List<IClusterInfo> list() {
+        return racService.getClusters();
+    }
 
-  @Override
-  @PutMapping
-  public UUID edit(@RequestBody IClusterInfo clusterInfo) {
-    return racService.editCluster(clusterInfo);
-  }
+    @Override
+    @PutMapping
+    public UUID edit(@RequestBody IClusterInfo clusterInfo) {
+        return racService.editCluster(clusterInfo);
+    }
 
 }

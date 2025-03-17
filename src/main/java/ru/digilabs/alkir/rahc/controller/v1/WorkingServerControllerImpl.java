@@ -27,42 +27,42 @@ import java.util.UUID;
 @RequestMapping("api/rest/v1/workingServer")
 public class WorkingServerControllerImpl implements WorkingServerController {
 
-  @Qualifier("sessionScopedRacService")
-  private final RacService racService;
+    @Qualifier("sessionScopedRacService")
+    private final RacService racService;
 
-  @Override
-  @GetMapping("all")
-  public List<IWorkingServerInfo> list(@RequestParam UUID clusterId) {
-    return racService.getWorkingServers(clusterId);
-  }
+    @Override
+    @GetMapping("all")
+    public List<IWorkingServerInfo> list(@RequestParam UUID clusterId) {
+        return racService.getWorkingServers(clusterId);
+    }
 
-  @Override
-  @GetMapping("workingProcesses")
-  public List<IWorkingProcessInfo> workingProcesses(@RequestParam UUID clusterId, @RequestParam UUID serverId) {
-    return racService.getServerWorkingProcesses(clusterId, serverId);
-  }
+    @Override
+    @GetMapping("workingProcesses")
+    public List<IWorkingProcessInfo> workingProcesses(@RequestParam UUID clusterId, @RequestParam UUID serverId) {
+        return racService.getServerWorkingProcesses(clusterId, serverId);
+    }
 
-  @Override
-  @GetMapping("clusterManagers")
-  public List<IClusterManagerInfo> clusterManagers(@RequestParam UUID clusterId, @RequestParam UUID serverId) {
-    return racService.getServerClusterManagers(clusterId, serverId);
-  }
+    @Override
+    @GetMapping("clusterManagers")
+    public List<IClusterManagerInfo> clusterManagers(@RequestParam UUID clusterId, @RequestParam UUID serverId) {
+        return racService.getServerClusterManagers(clusterId, serverId);
+    }
 
-  @Override
-  @GetMapping
-  public IWorkingServerInfo info(@RequestParam UUID clusterId, @RequestParam UUID serverId) {
-    return racService.getWorkingServer(clusterId, serverId);
-  }
+    @Override
+    @GetMapping
+    public IWorkingServerInfo info(@RequestParam UUID clusterId, @RequestParam UUID serverId) {
+        return racService.getWorkingServer(clusterId, serverId);
+    }
 
-  @Override
-  @PutMapping
-  public UUID edit(@RequestParam UUID clusterId, @RequestBody IWorkingServerInfo serverInfo) {
-    return racService.editWorkingServer(clusterId, serverInfo);
-  }
+    @Override
+    @PutMapping
+    public UUID edit(@RequestParam UUID clusterId, @RequestBody IWorkingServerInfo serverInfo) {
+        return racService.editWorkingServer(clusterId, serverInfo);
+    }
 
-  @Override
-  @DeleteMapping
-  public void delete(@RequestParam UUID clusterId, @RequestParam UUID serverId) {
-    racService.deleteWorkingServer(clusterId, serverId);
-  }
+    @Override
+    @DeleteMapping
+    public void delete(@RequestParam UUID clusterId, @RequestParam UUID serverId) {
+        racService.deleteWorkingServer(clusterId, serverId);
+    }
 }

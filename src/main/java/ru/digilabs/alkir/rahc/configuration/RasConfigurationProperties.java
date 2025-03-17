@@ -8,11 +8,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @Accessors(chain = true)
 public class RasConfigurationProperties {
-  int port = 1545;
-  String address = "localhost";
-  int timeout = 10000;
-  String clusterAdminUsername = "";
-  String clusterAdminPassword = "";
-  String centralServerAdminUsername = "";
-  String centralServerAdminPassword = "";
+    int port = 1545;
+    String address = "localhost";
+    int timeout = 10000;
+    String clusterAdminUsername = "";
+    String clusterAdminPassword = "";
+    String centralServerAdminUsername = "";
+    String centralServerAdminPassword = "";
 }

@@ -10,8 +10,8 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @EnableAdminServer
 public class RahcApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RahcApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RahcApplication.class, args);
+    }
 
 }

@@ -6,9 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("auth")
 @Data
 public class AuthConfigurationProperties {
-  String token = "";
+    String token = "";
 
-  public boolean isEnabled() {
-    return !token.isBlank();
-  }
+    public boolean isEnabled() {
+        return !token.isBlank();
+    }
 }
