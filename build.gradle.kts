@@ -56,6 +56,8 @@ repositories {
 	maven("https://jitpack.io")
 }
 
+extra["springBootAdminVersion"] = "3.4.5"
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-aop")
@@ -64,8 +66,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.security:spring-security-oauth2-resource-server")
 	implementation("org.springframework.retry:spring-retry")
-	implementation("de.codecentric:spring-boot-admin-starter-server:3.4.5")
-	implementation("de.codecentric:spring-boot-admin-starter-client:3.4.5")
+
+	implementation("de.codecentric:spring-boot-admin-starter-server")
+	implementation("de.codecentric:spring-boot-admin-starter-client")
 
 	implementation("com.github.LimeChain:jsonrpc4j:1.7.0")
 	implementation("javax.jws:javax.jws-api:1.1")
@@ -88,6 +91,12 @@ dependencies {
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom("de.codecentric:spring-boot-admin-dependencies:${property("springBootAdminVersion")}")
+	}
 }
 
 tasks.test {
