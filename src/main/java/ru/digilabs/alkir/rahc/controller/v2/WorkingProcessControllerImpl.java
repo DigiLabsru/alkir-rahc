@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.digilabs.alkir.rahc.controller.v2.api.ConnectionDTO;
+import ru.digilabs.alkir.rahc.dto.ConnectionDTO;
 import ru.digilabs.alkir.rahc.controller.v2.api.WorkingProcessController;
 import ru.digilabs.alkir.rahc.controller.v2.validation.ClusterIdIsNotEmpty;
 import ru.digilabs.alkir.rahc.service.RacServiceProvider;

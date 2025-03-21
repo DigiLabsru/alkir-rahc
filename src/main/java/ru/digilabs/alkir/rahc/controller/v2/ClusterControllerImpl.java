@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.digilabs.alkir.rahc.controller.v2.api.ClusterController;
-import ru.digilabs.alkir.rahc.controller.v2.api.ConnectionDTO;
+import ru.digilabs.alkir.rahc.dto.ConnectionDTO;
 import ru.digilabs.alkir.rahc.service.RacServiceProvider;
 
 import java.util.List;

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import ru.digilabs.alkir.rahc.controller.JsonRpcController;
 import ru.digilabs.alkir.rahc.controller.v2.validation.ClusterIdIsNotEmpty;
+import ru.digilabs.alkir.rahc.dto.ConnectionDTO;
 
 import java.util.List;
 import java.util.UUID;

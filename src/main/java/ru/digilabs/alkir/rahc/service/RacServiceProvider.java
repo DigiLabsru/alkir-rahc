@@ -5,7 +5,7 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.digilabs.alkir.rahc.configuration.RetryableRacMethod;
-import ru.digilabs.alkir.rahc.controller.v2.api.ConnectionDTO;
+import ru.digilabs.alkir.rahc.dto.ConnectionDTO;
 
 @Service
 @RequiredArgsConstructor

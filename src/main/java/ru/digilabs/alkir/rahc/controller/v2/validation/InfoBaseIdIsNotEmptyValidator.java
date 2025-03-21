@@ -3,7 +3,7 @@ package ru.digilabs.alkir.rahc.controller.v2.validation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
-import ru.digilabs.alkir.rahc.controller.v2.api.ConnectionDTO;
+import ru.digilabs.alkir.rahc.dto.ConnectionDTO;
 
 public class InfoBaseIdIsNotEmptyValidator implements ConstraintValidator<InfoBaseIdIsNotEmpty, ConnectionDTO> {
 
