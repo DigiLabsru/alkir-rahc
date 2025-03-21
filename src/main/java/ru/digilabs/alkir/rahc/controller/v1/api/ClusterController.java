@@ -15,9 +15,9 @@ import java.util.UUID;
 @Tag(name = "v1/cluster-controller")
 @SecurityRequirement(name = "bearer")
 public interface ClusterController extends JsonRpcController {
-  @Operation
-  List<IClusterInfo> list();
+    @Operation
+    List<IClusterInfo> list();
 
-  @Operation
-  UUID edit(@JsonRpcParam("clusterInfo") IClusterInfo clusterInfo);
+    @Operation
+    UUID edit(@JsonRpcParam("clusterInfo") IClusterInfo clusterInfo);
 }

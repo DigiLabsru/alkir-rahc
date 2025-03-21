@@ -16,38 +16,38 @@ import java.util.UUID;
 @Tag(name = "v1/working-server-controller")
 public interface WorkingServerController extends JsonRpcController {
 
-  @Operation
-  List<IWorkingServerInfo> list(
-    @JsonRpcParam("clusterId") UUID clusterId
-  );
+    @Operation
+    List<IWorkingServerInfo> list(
+        @JsonRpcParam("clusterId") UUID clusterId
+    );
 
-  @Operation
-  List<IWorkingProcessInfo> workingProcesses(
-    @JsonRpcParam("clusterId") UUID clusterId,
-    @JsonRpcParam("serverId") UUID serverId
-  );
+    @Operation
+    List<IWorkingProcessInfo> workingProcesses(
+        @JsonRpcParam("clusterId") UUID clusterId,
+        @JsonRpcParam("serverId") UUID serverId
+    );
 
-  @Operation
-  List<IClusterManagerInfo> clusterManagers(
-    @JsonRpcParam("clusterId") UUID clusterId,
-    @JsonRpcParam("serverId") UUID serverId
-  );
+    @Operation
+    List<IClusterManagerInfo> clusterManagers(
+        @JsonRpcParam("clusterId") UUID clusterId,
+        @JsonRpcParam("serverId") UUID serverId
+    );
 
-  @Operation
-  IWorkingServerInfo info(
-    @JsonRpcParam("clusterId") UUID clusterId,
-    @JsonRpcParam("serverId") UUID serverId
-  );
+    @Operation
+    IWorkingServerInfo info(
+        @JsonRpcParam("clusterId") UUID clusterId,
+        @JsonRpcParam("serverId") UUID serverId
+    );
 
-  @Operation
-  UUID edit(
-    @JsonRpcParam("clusterId") UUID clusterId,
-    @JsonRpcParam("serverInfo") IWorkingServerInfo serverInfo
-  );
+    @Operation
+    UUID edit(
+        @JsonRpcParam("clusterId") UUID clusterId,
+        @JsonRpcParam("serverInfo") IWorkingServerInfo serverInfo
+    );
 
-  @Operation
-  void delete(
-    @JsonRpcParam("clusterId") UUID clusterId,
-    @JsonRpcParam("serverId") UUID serverId
-  );
+    @Operation
+    void delete(
+        @JsonRpcParam("clusterId") UUID clusterId,
+        @JsonRpcParam("serverId") UUID serverId
+    );
 }

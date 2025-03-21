@@ -2,13 +2,13 @@ plugins {
 	java
 	jacoco
 	`maven-publish`
-	id("org.springframework.boot") version "2.7.2"
-	id("io.spring.dependency-management") version "1.0.12.RELEASE"
-	id("io.freefair.javadoc-links") version "6.5.0.3"
-	id("io.freefair.javadoc-utf-8") version "6.5.0.3"
-	id("io.freefair.lombok") version "6.5.0.3"
-	id("com.github.ben-manes.versions") version "0.42.0"
-	id("me.qoomon.git-versioning") version "6.3.0"
+	id("org.springframework.boot") version "3.4.3"
+	id("io.spring.dependency-management") version "1.1.7"
+	id("io.freefair.javadoc-links") version "8.13"
+	id("io.freefair.javadoc-utf-8") version "8.13"
+	id("io.freefair.lombok")        version "8.13"
+	id("com.github.ben-manes.versions") version "0.52.0"
+	id("me.qoomon.git-versioning") version "6.4.4"
 }
 
 group = "ru.digilabs.alkir"
@@ -53,7 +53,10 @@ configurations {
 repositories {
 	mavenLocal()
 	mavenCentral()
+	maven("https://jitpack.io")
 }
+
+extra["springBootAdminVersion"] = "3.4.5"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -63,14 +66,16 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.security:spring-security-oauth2-resource-server")
 	implementation("org.springframework.retry:spring-retry")
-	implementation("de.codecentric:spring-boot-admin-starter-server:2.7.3")
-	implementation("de.codecentric:spring-boot-admin-starter-client:2.7.3")
 
-	implementation("com.github.briandilley.jsonrpc4j:jsonrpc4j:1.6")
+	implementation("de.codecentric:spring-boot-admin-starter-server")
+	implementation("de.codecentric:spring-boot-admin-starter-client")
+
+	implementation("com.github.LimeChain:jsonrpc4j:1.7.0")
 	implementation("javax.jws:javax.jws-api:1.1")
 
-	implementation("org.springdoc", "springdoc-openapi-ui", "1.6.9")
-	implementation("org.springdoc", "springdoc-openapi-security", "1.6.9")
+	implementation("org.springdoc", "springdoc-openapi-starter-webmvc-ui", "2.8.5")
+	implementation("org.springdoc", "springdoc-openapi-starter-webmvc-api", "2.8.5")
+//	implementation("org.springdoc", "springdoc-openapi-security", "1.8.0")
 
 	implementation("org.jboss.netty", "netty", "3.2.10.Final")
 
@@ -81,11 +86,17 @@ dependencies {
 	implementation("com._1c.v8", "swp", "1.0.2")
 	implementation("com._1c.v8", "swp.netty", "1.0.2")
 
-	implementation("org.awaitility", "awaitility", "4.2.0")
+	implementation("org.awaitility", "awaitility", "4.3.0")
 
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom("de.codecentric:spring-boot-admin-dependencies:${property("springBootAdminVersion")}")
+	}
 }
 
 tasks.test {
@@ -107,7 +118,7 @@ tasks.check {
 tasks.jacocoTestReport {
 	reports {
 		xml.required.set(true)
-		xml.outputLocation.set(File("$buildDir/reports/jacoco/test/jacoco.xml"))
+		xml.outputLocation.set(File("${layout.buildDirectory.get()}/reports/jacoco/test/jacoco.xml"))
 	}
 }
 

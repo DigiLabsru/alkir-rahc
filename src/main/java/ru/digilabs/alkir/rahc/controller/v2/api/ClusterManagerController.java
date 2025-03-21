@@ -7,10 +7,10 @@ import com.googlecode.jsonrpc4j.JsonRpcService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import ru.digilabs.alkir.rahc.controller.JsonRpcController;
 import ru.digilabs.alkir.rahc.controller.v2.validation.ClusterIdIsNotEmpty;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,20 +18,20 @@ import java.util.UUID;
 @Tag(name = "v2/cluster-manager-controller")
 @SecurityRequirement(name = "bearer")
 public interface ClusterManagerController extends JsonRpcController {
-  @Operation
-  List<IClusterManagerInfo> list(
-    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection
-  );
+    @Operation
+    List<IClusterManagerInfo> list(
+        @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection
+    );
 
-  @Operation
-  IClusterManagerInfo getClusterManagerInfo(
-    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
-    @JsonRpcParam("managerId") UUID managerId
-  );
+    @Operation
+    IClusterManagerInfo getClusterManagerInfo(
+        @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+        @JsonRpcParam("managerId") UUID managerId
+    );
 
-  @Operation
-  List<IClusterServiceInfo> getClusterServices(
-    @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
-    @JsonRpcParam("managerId") UUID managerId
-  );
+    @Operation
+    List<IClusterServiceInfo> getClusterServices(
+        @JsonRpcParam("connection") @Valid @ClusterIdIsNotEmpty ConnectionDTO connection,
+        @JsonRpcParam("managerId") UUID managerId
+    );
 }
