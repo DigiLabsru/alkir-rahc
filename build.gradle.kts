@@ -70,12 +70,13 @@ dependencies {
 	implementation("de.codecentric:spring-boot-admin-starter-server")
 	implementation("de.codecentric:spring-boot-admin-starter-client")
 
+	implementation("info.picocli:picocli-spring-boot-starter:4.7.6")
+
 	implementation("com.github.LimeChain:jsonrpc4j:1.7.0")
 	implementation("javax.jws:javax.jws-api:1.1")
 
 	implementation("org.springdoc", "springdoc-openapi-starter-webmvc-ui", "2.8.5")
 	implementation("org.springdoc", "springdoc-openapi-starter-webmvc-api", "2.8.5")
-//	implementation("org.springdoc", "springdoc-openapi-security", "1.8.0")
 
 	implementation("org.jboss.netty", "netty", "3.2.10.Final")
 

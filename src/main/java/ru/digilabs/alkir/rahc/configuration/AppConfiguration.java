@@ -60,11 +60,6 @@ public class AppConfiguration {
     }
 
     @Bean
-    AutoJsonRpcServiceImplExporter autoJsonRpcServiceImplExporter() {
-        return new AutoJsonRpcServiceImplExporter();
-    }
-
-    @Bean
     public RetryTemplate retryTemplate() {
         RetryTemplate retryTemplate = new RetryTemplate();
 
