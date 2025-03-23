@@ -10,6 +10,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Unmatched;
 import ru.digilabs.alkir.rahc.command.CliCommand;
 import ru.digilabs.alkir.rahc.command.WebCommand;
 
@@ -29,6 +30,8 @@ import java.util.regex.Pattern;
         CliCommand.class
     },
     usageHelpAutoWidth = true,
+    mixinStandardHelpOptions = true,
+    sortOptions = false,
     synopsisSubcommandLabel = "[COMMAND [ARGS]]",
     footer = "@|green Copyright(c) 2022-2025|@",
     header = "@|green Alkir RAHC|@")
@@ -41,14 +44,7 @@ public class RahcApplication implements ExitCodeGenerator {
     @Getter
     private int exitCode;
 
-    @CommandLine.Option(
-        names = {"-h", "--help"},
-        usageHelp = true,
-        scope = CommandLine.ScopeType.INHERIT,
-        description = "Show this help message and exit")
-    private boolean usageHelpRequested;
-
-    @CommandLine.Unmatched
+    @Unmatched
     private List<String> unmatched;
 
     private final Set<Pattern> allowedAdditionalArgs = Set.of(
@@ -120,11 +116,17 @@ public class RahcApplication implements ExitCodeGenerator {
     }
 
     private static WebApplicationType getWebApplicationType(String[] args) {
-        WebApplicationType webApplicationType = WebApplicationType.SERVLET;
+        var webApplicationType = switch (DEFAULT_COMMAND) {
+            case "cli" -> WebApplicationType.NONE;
+            case "web" -> WebApplicationType.SERVLET;
+            default -> throw new IllegalStateException("Unexpected value: " + DEFAULT_COMMAND);
+        };
 
         var argsList = Arrays.asList(args);
         if (argsList.contains("cli") || argsList.contains("-h") || argsList.contains("--help")) {
             webApplicationType = WebApplicationType.NONE;
+        } else if (argsList.contains("web")) {
+            webApplicationType = WebApplicationType.SERVLET;
         }
 
         return webApplicationType;
