@@ -1,7 +1,6 @@
 package ru.digilabs.alkir.rahc.command.cli;
 
 import lombok.Getter;
-import picocli.CommandLine;
 import picocli.CommandLine.Option;
 
 import java.util.Optional;
@@ -12,30 +11,32 @@ public class RasLocation {
 
     @Option(
         names = {"--address"},
-        defaultValue = "localhost",
+        order = 0,
         showDefaultValue = ALWAYS
     )
     @Getter
-    private String address;
+    private static String address = "localhost";
 
     @Option(
         names = {"--port"},
-        defaultValue = "1545",
+        order = 1,
         showDefaultValue = ALWAYS
     )
     @Getter
-    private int port;
+    private static int port = 1545;
 
     @Option(
-        names = {"--central-server-usr"}
+        names = {"--central-server-usr"},
+        order = 10
     )
     @Getter
-    private Optional<String> centralServerAdminUsername;
+    private static Optional<String> centralServerAdminUsername;
 
     @Option(
-        names = {"--central-server-pwd"}
+        names = {"--central-server-pwd"},
+        order = 20
     )
     @Getter
-    private Optional<String> centralServerAdminPassword;
+    private static Optional<String> centralServerAdminPassword;
 
 }

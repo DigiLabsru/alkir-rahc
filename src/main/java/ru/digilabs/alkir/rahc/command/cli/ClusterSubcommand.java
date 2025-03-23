@@ -5,11 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
-import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Mixin;
-import picocli.CommandLine.ParentCommand;
-import ru.digilabs.alkir.rahc.command.CliCommand;
 import ru.digilabs.alkir.rahc.dto.ConnectionDTO;
 import ru.digilabs.alkir.rahc.service.RacServiceProvider;
 
@@ -19,6 +16,8 @@ import java.util.List;
     name = "cluster",
     description = "cluster command",
     usageHelpAutoWidth = true,
+    mixinStandardHelpOptions = true,
+    sortOptions = false,
     footer = "@|green Copyright(c) 2022-2025|@"
 )
 @Component
@@ -31,7 +30,11 @@ public class ClusterSubcommand {
     private final RacServiceProvider racServiceProvider;
     private final ObjectMapper objectMapper;
 
-    @Command
+    @Command(
+        usageHelpAutoWidth = true,
+        mixinStandardHelpOptions = true,
+        sortOptions = false
+    )
     @SneakyThrows
     public void list(@Mixin RasLocation rasLocation) {
         var connection = new ConnectionDTO();
