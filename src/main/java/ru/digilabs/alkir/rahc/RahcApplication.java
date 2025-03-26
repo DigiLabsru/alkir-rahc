@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
     header = "@|green Alkir RAHC|@")
 public class RahcApplication implements ExitCodeGenerator {
 
-    private static final String DEFAULT_COMMAND = "web";
+    private static final String DEFAULT_COMMAND = "cli";
 
     private final CommandLine.IFactory picocliFactory;
 
