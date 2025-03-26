@@ -2,9 +2,7 @@ package ru.digilabs.alkir.rahc.command;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
 
 import java.util.concurrent.Callable;
 
@@ -12,6 +10,8 @@ import java.util.concurrent.Callable;
     name = "web",
     description = "Run RAHC Web server",
     usageHelpAutoWidth = true,
+    mixinStandardHelpOptions = true,
+    sortOptions = false,
     footer = "@|green Copyright(c) 2022-2025|@"
 )
 @Component

@@ -4,11 +4,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import ru.digilabs.alkir.rahc.configuration.RasConfigurationProperties;
 
 import java.util.Optional;
 
 @Data
+@Accessors(chain = true)
 public class ConnectionDTO {
     @NotBlank
     String address;

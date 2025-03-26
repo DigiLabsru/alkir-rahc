@@ -99,6 +99,12 @@ public class RacService implements Serializable, AutoCloseable {
     }
 
     @RetryableRacMethod
+    public IClusterInfo getClusterInfo(UUID clusterId) {
+        checkConnection();
+        return connection.getClusterInfo(clusterId);
+    }
+
+    @RetryableRacMethod
     public UUID editCluster(IClusterInfo clusterInfo) {
         checkConnection();
         authenticate(clusterInfo.getClusterId());

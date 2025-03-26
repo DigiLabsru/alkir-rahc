@@ -2,7 +2,7 @@ plugins {
 	java
 	jacoco
 	`maven-publish`
-	id("org.springframework.boot") version "3.4.3"
+	id("org.springframework.boot") version "3.4.4"
 	id("io.spring.dependency-management") version "1.1.7"
 	id("io.freefair.javadoc-links") version "8.13"
 	id("io.freefair.javadoc-utf-8") version "8.13"
@@ -57,6 +57,8 @@ repositories {
 }
 
 extra["springBootAdminVersion"] = "3.4.5"
+extra["springDocVersion"] = "2.8.5"
+extra["picocliVersion"] = "4.7.6"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -67,16 +69,19 @@ dependencies {
 	implementation("org.springframework.security:spring-security-oauth2-resource-server")
 	implementation("org.springframework.retry:spring-retry")
 
+	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
 	implementation("de.codecentric:spring-boot-admin-starter-server")
 	implementation("de.codecentric:spring-boot-admin-starter-client")
 
-	implementation("info.picocli:picocli-spring-boot-starter:4.7.6")
+	implementation("info.picocli:picocli-spring-boot-starter:${property("picocliVersion")}")
+	annotationProcessor("info.picocli:picocli-codegen:${property("picocliVersion")}")
 
 	implementation("com.github.LimeChain:jsonrpc4j:1.7.0")
 	implementation("javax.jws:javax.jws-api:1.1")
 
-	implementation("org.springdoc", "springdoc-openapi-starter-webmvc-ui", "2.8.5")
-	implementation("org.springdoc", "springdoc-openapi-starter-webmvc-api", "2.8.5")
+	implementation("org.springdoc", "springdoc-openapi-starter-webmvc-ui", "${property("springDocVersion")}")
+	implementation("org.springdoc", "springdoc-openapi-starter-webmvc-api", "${property("springDocVersion")}")
 
 	implementation("org.jboss.netty", "netty", "3.2.10.Final")
 
@@ -88,8 +93,6 @@ dependencies {
 	implementation("com._1c.v8", "swp.netty", "1.0.2")
 
 	implementation("org.awaitility", "awaitility", "4.3.0")
-
-	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
