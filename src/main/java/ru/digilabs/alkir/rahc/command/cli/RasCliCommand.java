@@ -16,6 +16,14 @@ public abstract class RasCliCommand {
     @ParentCommand
     CliCommand parentCommand;
 
+    /**
+     * Retrieves the common RAS options from the parent CLI command.
+     *
+     * <p>This method delegates to the parent command to obtain shared RAS configuration options
+     * that are used to standardize command-line behavior across multiple commands.</p>
+     *
+     * @return the common RAS options from the parent command
+     */
     protected CommonRasOptions getCommonRasOptions() {
         return parentCommand.getCommonRasOptions();
     }

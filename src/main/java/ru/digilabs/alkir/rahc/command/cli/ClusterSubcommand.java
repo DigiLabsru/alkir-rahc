@@ -22,6 +22,14 @@ public class ClusterSubcommand extends RasCliCommand {
     private final RacServiceProvider racServiceProvider;
     private final PrintWriter printWriter;
 
+    /**
+     * Retrieves and prints the list of cluster information.
+     * 
+     * <p>This method converts common connection options to a DTO,
+     * acquires a RAC service instance to fetch the cluster list, and then
+     * prints the list using the configured PrintWriter. The RAC service
+     * is automatically closed using a try-with-resources block.
+     */
     @Command(
         description = "get the cluster information list",
         usageHelpAutoWidth = true,
@@ -37,6 +45,14 @@ public class ClusterSubcommand extends RasCliCommand {
         }
     }
 
+    /**
+     * Retrieves and prints detailed information for a specific cluster.
+     *
+     * <p>This command uses common RAC options to establish a connection, obtains a RAC service,
+     * and prints the cluster details for the provided cluster UUID.</p>
+     *
+     * @param clusterId the unique identifier of the cluster to retrieve information for
+     */
     @Command(
         description = "get the cluster information",
         usageHelpAutoWidth = true,

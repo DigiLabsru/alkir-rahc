@@ -24,6 +24,13 @@ public class SessionSubcommand extends RasCliCommand {
     private final RacServiceProvider racServiceProvider;
     private final PrintWriter printWriter;
 
+    /**
+     * Retrieves and prints the list of sessions for the configured cluster.
+     * <p>
+     * This method converts common options into a connection DTO using the cluster administration options,
+     * obtains a RAC service to fetch session details using the specified cluster ID, and outputs the session list
+     * via a PrintWriter. Any exceptions encountered during these operations will propagate up the call stack.
+     */
     @Command(
         description = "get the session list",
         usageHelpAutoWidth = true,

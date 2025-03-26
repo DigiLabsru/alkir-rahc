@@ -32,14 +32,34 @@ public class ClusterAdminOptions {
     )
     private static Optional<String> clusterAdminPassword = Optional.empty();
 
+    /**
+     * Returns the UUID representing the server cluster identifier.
+     *
+     * <p>This value is provided through the {@code --cluster-id} command-line option.</p>
+     *
+     * @return the UUID of the server cluster
+     */
     public UUID getClusterId() {
         return clusterId;
     }
 
+    /**
+     * Retrieves the cluster administrator's username.
+     *
+     * @return an Optional containing the username if provided, or an empty Optional otherwise.
+     */
     public Optional<String> getClusterAdminUsername() {
         return clusterAdminUsername;
     }
 
+    /**
+     * Returns the cluster administrator's password.
+     *
+     * <p>This method retrieves the password provided via the '--cluster-pwd' command-line option.
+     * The result is wrapped in an Optional that is empty if no password was specified.</p>
+     *
+     * @return an Optional containing the cluster administrator's password if provided, otherwise empty
+     */
     public Optional<String> getClusterAdminPassword() {
         return clusterAdminPassword;
     }

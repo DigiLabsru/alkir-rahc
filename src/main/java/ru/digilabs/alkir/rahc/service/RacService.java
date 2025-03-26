@@ -92,18 +92,45 @@ public class RacService implements Serializable, AutoCloseable {
             .orElseThrow(() -> new IllegalArgumentException("Can't find infobase with name %s".formatted(ibName)));
     }
 
+    /**
+     * Retrieves all clusters from the remote administration service.
+     * <p>
+     * This method verifies the connection state before fetching cluster information.
+     * </p>
+     *
+     * @return a list of {@link IClusterInfo} objects representing the available clusters
+     */
     @RetryableRacMethod
     public List<IClusterInfo> getClusters() {
         checkConnection();
         return connection.getClusters();
     }
 
+    /**
+     * Retrieves detailed information about the cluster identified by the specified UUID.
+     *
+     * <p>This method verifies an active connection with the remote administration service and then
+     * returns the comprehensive information associated with the given cluster identifier.</p>
+     *
+     * @param clusterId the unique identifier of the cluster
+     * @return the detailed information of the specified cluster
+     */
     @RetryableRacMethod
     public IClusterInfo getClusterInfo(UUID clusterId) {
         checkConnection();
         return connection.getClusterInfo(clusterId);
     }
 
+    /**
+     * Edits a cluster's information by authenticating and updating its record in the remote administration service.
+     *
+     * <p>This method first confirms an active connection, then performs authentication using the cluster identifier
+     * from the provided cluster information. It then submits the updated cluster details to the remote service,
+     * returning the unique identifier corresponding to the edited cluster.
+     *
+     * @param clusterInfo the updated cluster information
+     * @return the unique identifier of the edited cluster
+     */
     @RetryableRacMethod
     public UUID editCluster(IClusterInfo clusterInfo) {
         checkConnection();

@@ -40,22 +40,48 @@ public class CommonRasOptions {
     )
     private static Optional<String> centralServerAdminPassword = Optional.empty();
 
+    /**
+     * Retrieves the server address used for establishing connections.
+     *
+     * @return the server address, which defaults to "localhost" if not explicitly set.
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Returns the server port.
+     *
+     * @return the port number for server connections
+     */
     public int getPort() {
         return port;
     }
 
+    /**
+     * Retrieves the optional username for the central server administrator.
+     *
+     * @return an Optional containing the admin username if set; otherwise, an empty Optional.
+     */
     public Optional<String> getCentralServerAdminUsername() {
         return centralServerAdminUsername;
     }
 
+    /**
+     * Returns the optional central server administrator's password.
+     *
+     * @return an Optional containing the password if present, or an empty Optional otherwise.
+     */
     public Optional<String> getCentralServerAdminPassword() {
         return centralServerAdminPassword;
     }
 
+    /**
+     * Creates a ConnectionDTO instance populated with the configured server address, port, and
+     * central server administrator credentials.
+     *
+     * @return a ConnectionDTO instance with its fields set from the current command-line options.
+     */
     public ConnectionDTO toConnectionDTO() {
         var connectionDTO = new ConnectionDTO();
         connectionDTO
@@ -67,6 +93,15 @@ public class CommonRasOptions {
         return connectionDTO;
     }
 
+    /**
+     * Creates a ConnectionDTO with cluster admin credentials.
+     *
+     * <p>This method first constructs a base ConnectionDTO using the default command-line options,
+     * then integrates cluster admin credentials from the provided ClusterAdminOptions.
+     *
+     * @param clusterAdminOptions an object containing cluster admin username and password
+     * @return a ConnectionDTO populated with both the default and cluster admin credentials
+     */
     public ConnectionDTO toConnectionDTO(ClusterAdminOptions clusterAdminOptions) {
         var connectionDTO = toConnectionDTO();
         connectionDTO

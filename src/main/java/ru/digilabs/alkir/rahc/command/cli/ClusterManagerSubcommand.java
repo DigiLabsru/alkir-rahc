@@ -26,6 +26,14 @@ public class ClusterManagerSubcommand extends RasCliCommand {
     private final RacServiceProvider racServiceProvider;
     private final PrintWriter printWriter;
 
+    /**
+     * Retrieves and prints a list of cluster manager information.
+     *
+     * <p>
+     * Establishes a connection using common Ras options combined with cluster administration options,
+     * obtains a RAC service to fetch details for the configured cluster, and prints the resulting list.
+     * </p>
+     */
     @Command(
         description = "get the cluster manager information list",
         usageHelpAutoWidth = true,
@@ -41,6 +49,14 @@ public class ClusterManagerSubcommand extends RasCliCommand {
         }
     }
 
+    /**
+     * Retrieves and prints detailed information for a specified cluster manager.
+     *
+     * <p>This method creates a connection using common RAS options and cluster admin settings,
+     * obtains the corresponding cluster manager information via the RAC service, and outputs the details.
+     *
+     * @param clusterManagerId the unique identifier of the cluster manager to query
+     */
     @Command(
         description = "get the cluster manager information",
         usageHelpAutoWidth = true,
