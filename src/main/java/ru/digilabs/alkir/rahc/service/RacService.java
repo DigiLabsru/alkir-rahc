@@ -17,7 +17,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import ru.digilabs.alkir.rahc.configuration.RasConfigurationProperties;
@@ -38,17 +37,14 @@ import static org.springframework.beans.factory.config.ConfigurableBeanFactory.S
 public class RacService implements Serializable, AutoCloseable {
 
     private final transient RasConfigurationProperties rasProperties;
-
-    @Autowired
-    private transient IAgentAdminConnectorFactory factory;
+    private final transient IAgentAdminConnectorFactory factory;
 
     private transient IAgentAdminConnector connector;
     private transient IAgentAdminConnection connection;
 
     @PostConstruct
-    protected void init() {
+    public void init() {
         connector = factory.createConnector(rasProperties.getTimeout());
-
     }
 
     @PreDestroy
