@@ -108,6 +108,13 @@ public class RacService implements Serializable, AutoCloseable {
     }
 
     @RetryableRacMethod
+    public void deleteCluster(UUID clusterId) {
+        checkConnection();
+        authenticate(clusterId);
+        connection.unregCluster(clusterId);
+    }
+
+    @RetryableRacMethod
     public List<IClusterManagerInfo> getClusterManagers(UUID clusterId) {
         checkConnection();
         authenticate(clusterId);
