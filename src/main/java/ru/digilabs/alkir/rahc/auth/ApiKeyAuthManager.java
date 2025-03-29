@@ -1,6 +1,7 @@
 package ru.digilabs.alkir.rahc.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import ru.digilabs.alkir.rahc.configuration.AuthConfigurationProperties;
 
 @Component
+@Profile("web")
 @RequiredArgsConstructor
 public class ApiKeyAuthManager implements AuthenticationManager {
 

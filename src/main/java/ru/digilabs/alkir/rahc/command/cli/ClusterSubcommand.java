@@ -4,12 +4,12 @@ import com._1c.v8.ibis.admin.IClusterInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
+import picocli.CommandLine.Mixin;
+import ru.digilabs.alkir.rahc.command.cli.options.ClusterAdminOptions;
+import ru.digilabs.alkir.rahc.command.cli.options.ClusterIdOption;
 import ru.digilabs.alkir.rahc.service.RacServiceProvider;
 
-import java.io.PrintWriter;
 import java.util.List;
-import java.util.UUID;
 
 @Command(
     name = "cluster",
@@ -20,7 +20,7 @@ import java.util.UUID;
 public class ClusterSubcommand extends RasCliCommand {
 
     private final RacServiceProvider racServiceProvider;
-    private final PrintWriter printWriter;
+    private final CliPrintWriter printWriter;
 
     @Command(
         description = "get the cluster information list",
@@ -33,7 +33,7 @@ public class ClusterSubcommand extends RasCliCommand {
 
         try (var racService = racServiceProvider.getRacService(connection)) {
             List<IClusterInfo> clusters = racService.getClusters();
-            printWriter.println(clusters);
+            printWriter.printSuccess(clusters);
         }
     }
 
@@ -43,18 +43,26 @@ public class ClusterSubcommand extends RasCliCommand {
         mixinStandardHelpOptions = true,
         sortOptions = false
     )
-    public void info(
-        @Option(
-            names = "--cluster-id",
-            description = "server cluster identifier (UUID)",
-            required = true
-        ) UUID clusterId
-    ) {
+    public void info(@Mixin ClusterIdOption clusterIdOption) {
         var connection = getCommonRasOptions().toConnectionDTO();
 
         try (var racService = racServiceProvider.getRacService(connection)) {
-            IClusterInfo clusterInfo = racService.getClusterInfo(clusterId);
-            printWriter.println(clusterInfo);
+            IClusterInfo clusterInfo = racService.getClusterInfo(clusterIdOption.getOptionValue());
+            printWriter.printSuccess(clusterInfo);
+        }
+    }
+
+    @Command(
+        description = "delete the cluster",
+        usageHelpAutoWidth = true,
+        mixinStandardHelpOptions = true,
+        sortOptions = false
+    )
+    public void delete(@Mixin ClusterAdminOptions clusterAdminOptions) {
+        var connection = getCommonRasOptions().toConnectionDTO(clusterAdminOptions);
+
+        try (var racService = racServiceProvider.getRacService(connection)) {
+            racService.deleteCluster(clusterAdminOptions.getClusterId());
         }
     }
 

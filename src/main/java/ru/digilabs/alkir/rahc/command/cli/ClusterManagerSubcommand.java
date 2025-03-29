@@ -9,7 +9,6 @@ import picocli.CommandLine.Option;
 import ru.digilabs.alkir.rahc.command.cli.options.ClusterAdminOptions;
 import ru.digilabs.alkir.rahc.service.RacServiceProvider;
 
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public class ClusterManagerSubcommand extends RasCliCommand {
     private @Mixin ClusterAdminOptions clusterAdminOptions;
 
     private final RacServiceProvider racServiceProvider;
-    private final PrintWriter printWriter;
+    private final CliPrintWriter printWriter;
 
     @Command(
         description = "get the cluster manager information list",
@@ -58,7 +57,7 @@ public class ClusterManagerSubcommand extends RasCliCommand {
 
         try (var racService = racServiceProvider.getRacService(connection)) {
             IClusterManagerInfo clusterManagerInfo = racService.getClusterManagerInfo(clusterAdminOptions.getClusterId(), clusterManagerId);
-            printWriter.println(clusterManagerInfo);
+            printWriter.printSuccess(clusterManagerInfo);
         }
     }
 

@@ -4,9 +4,10 @@ plugins {
 	`maven-publish`
 	id("org.springframework.boot") version "3.4.4"
 	id("io.spring.dependency-management") version "1.1.7"
-	id("io.freefair.javadoc-links") version "8.13"
-	id("io.freefair.javadoc-utf-8") version "8.13"
-	id("io.freefair.lombok")        version "8.13"
+	id("io.freefair.javadoc-links")                version "8.13.1"
+	id("io.freefair.javadoc-utf-8")                version "8.13.1"
+	id("io.freefair.lombok")                       version "8.13.1"
+	id("io.freefair.aspectj.post-compile-weaving") version "8.13.1"
 	id("com.github.ben-manes.versions") version "0.52.0"
 	id("me.qoomon.git-versioning") version "6.4.4"
 }
@@ -76,6 +77,8 @@ dependencies {
 
 	implementation("info.picocli:picocli-spring-boot-starter:${property("picocliVersion")}")
 	annotationProcessor("info.picocli:picocli-codegen:${property("picocliVersion")}")
+
+	implementation("org.aspectj", "aspectjrt", "1.9.22.1")
 
 	implementation("com.github.LimeChain:jsonrpc4j:1.7.0")
 	implementation("javax.jws:javax.jws-api:1.1")
