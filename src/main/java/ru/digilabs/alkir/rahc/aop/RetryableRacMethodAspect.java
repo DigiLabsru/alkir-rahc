@@ -58,7 +58,8 @@ public class RetryableRacMethodAspect {
 
                 try {
                     await()
-                        .atMost(100_000, TimeUnit.MILLISECONDS)
+                        .atMost(10_000, TimeUnit.MILLISECONDS)
+
                         .untilAtomic(reference, notNullValue());
                 } catch (ConditionTimeoutException ex) {
                     thread.interrupt();
