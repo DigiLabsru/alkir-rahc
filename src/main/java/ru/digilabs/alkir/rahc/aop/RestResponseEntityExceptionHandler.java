@@ -4,6 +4,7 @@ import com._1c.v8.ibis.admin.AgentAdminAuthenticationException;
 import com._1c.v8.ibis.admin.AgentAdminException;
 import jakarta.validation.ConstraintViolationException;
 import org.awaitility.core.ConditionTimeoutException;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
+@Profile("web")
 public class RestResponseEntityExceptionHandler
     extends ResponseEntityExceptionHandler {
 

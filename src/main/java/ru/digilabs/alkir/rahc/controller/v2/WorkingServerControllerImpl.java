@@ -7,6 +7,7 @@ import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController("workingServerControllerV2Impl")
+@Profile("web")
 @AutoJsonRpcServiceImpl
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearer")
